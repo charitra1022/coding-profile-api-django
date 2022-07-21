@@ -34,7 +34,7 @@ class LeetCodeProfile(models.Model):
 class HackerRankProfile(models.Model):
     username = models.CharField(max_length=20, primary_key=True)
     platform = models.CharField(max_length=20)
-    stars = models.PositiveIntegerField(default=1)
+    badges = models.JSONField(default=list)
 
     def __str__(self) -> str:
         msg = f"{self.platform}:{self.username}"
