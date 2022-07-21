@@ -1,12 +1,10 @@
-from platform import platform
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.shortcuts import get_list_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+
 from .models import GFGProfile, CodeChefProfile, LeetCodeProfile, HackerRankProfile
 from .serializers import GFGProfileSerializer, CodeChefProfileSerializer, LeetCodeProfileSerializer, HackerRankProfileSerializer
+from .scrapping import getCodeChefProfile, getHackerRankProfile, getGFGProfile, getLeetCodeProfile
 
 
 class GetDetails(APIView):
@@ -87,54 +85,4 @@ class GetDetails(APIView):
 
         # return the API response as json
         return Response(data)
-        
-
-        
-def getGFGProfile(username, platform):
-    # Retrieve GFG profile
-
-    url = f'https://auth.geeksforgeeks.org/user/{username}/profile'
-    profile = {
-        "username": username,
-        "platform": platform,
-        "problems": 0,
-    }
-    return profile
-
-
-
-def getLeetCodeProfile(username, platform):
-    
-    url = f'https://leetcode.com/{username}/'
-    profile = {
-        "username": username,
-        "platform": platform,
-        "problems": 0,
-    }
-    return profile
-
-
-
-def getCodeChefProfile(username, platform):
-    
-    url = f'https://www.codechef.com/users/{username}'
-    profile = {
-        "username": username,
-        "platform": platform,
-        "problems": 0,
-    }
-    return profile
-
-
-
-def getHackerRankProfile(username, platform):
-    
-    url = f'https://www.hackerrank.com/{username}'
-    profile = {
-        "username": username,
-        "platform": platform,
-        "problems": 0,
-    }
-    return profile
-
 
