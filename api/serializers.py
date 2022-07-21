@@ -24,7 +24,7 @@ class LeetCodeProfileSerializer(serializers.ModelSerializer):
 class HackerRankProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = HackerRankProfile
-        fields = ('username', 'platform', 'stars')
+        fields = ('username', 'platform', 'badges')
 
 
 

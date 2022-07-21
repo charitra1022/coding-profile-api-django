@@ -67,7 +67,7 @@ class GetDetails(APIView):
             newProfile = HackerRankProfile(
                 username=profileDetail['username'], 
                 platform=profileDetail['platform'], 
-                problems=profileDetail['problems'],
+                badges=profileDetail['badges'],
             )
             newProfile.save()
             

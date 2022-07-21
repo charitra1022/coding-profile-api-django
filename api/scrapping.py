@@ -62,3 +62,28 @@ def getCodeChefProfile(username, platform):
         "rating": rating,
     }
     return profile
+    
+
+
+def getHackerRankProfile(username, platform):
+    # Retrieve HackerRank profile
+    
+    url = f'https://www.hackerrank.com/{username}'
+    r = requests.get(url=url, headers=headers)
+    soup = BeautifulSoup(r.content, 'html5lib')
+
+    badgesList = soup.find('div', attrs={'class': 'badges-list'}).find_all('div', attrs={'class': 'hacker-badge'})
+    badgeData = []
+
+    for badge in badgesList:
+        name = badge.find('text', attrs={'class': 'badge-title'}).text
+        stars = len(badge.find_all('svg', attrs={'class', 'badge-star'}))
+        data = { name: stars }
+        badgeData.append(data)
+
+    profile = {
+        "username": username,
+        "platform": platform,
+        "badges": badgeData,
+    }
+    return profile
