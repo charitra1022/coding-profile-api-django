@@ -13,7 +13,7 @@ class GFGProfile(models.Model):
 class CodeChefProfile(models.Model):
     username = models.CharField(max_length=20, primary_key=True)
     platform = models.CharField(max_length=20)
-    stars = models.PositiveIntegerField(default=1)
+    stars = models.PositiveIntegerField(default=0)
     rating = models.PositiveIntegerField(default=0)
 
     def __str__(self) -> str:
