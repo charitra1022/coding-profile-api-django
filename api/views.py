@@ -52,7 +52,8 @@ class GetDetails(APIView):
             newProfile = CodeChefProfile(
                 username=profileDetail['username'], 
                 platform=profileDetail['platform'], 
-                problems=profileDetail['problems'],
+                stars=profileDetail['stars'],
+                rating=profileDetail['rating'],
             )
             newProfile.save()
             

@@ -14,12 +14,12 @@ def getGFGProfile(username, platform):
     url = f'https://auth.geeksforgeeks.org/user/{username}/practice'
     r = requests.get(url=url, headers=headers)
     soup = BeautifulSoup(r.content, 'html5lib')
-    problemsSolved = soup.find('a', attrs={'href': '#problem-solved-div'}).text.split(':')[1].split()[0]
+    problemsSolved = int(soup.find('a', attrs={'href': '#problem-solved-div'}).text.split(':')[1].split()[0])
 
     profile = {
         "username": username,
         "platform": platform,
-        "problems": int(problemsSolved),
+        "problems": problemsSolved,
     }
     return profile
 
@@ -34,7 +34,7 @@ def getLeetCodeProfile(username, platform):
     r = requests.get(url=url, headers=headers)
     data = r.json()
 
-    problemsSolved = data['data']['matchedUser']['submitStats']['acSubmissionNum'][0]['count']
+    problemsSolved = int(data['data']['matchedUser']['submitStats']['acSubmissionNum'][0]['count'])
 
     profile = {
         "username": username,
@@ -43,3 +43,22 @@ def getLeetCodeProfile(username, platform):
     }
     return profile
 
+
+
+def getCodeChefProfile(username, platform):
+    # Retrieve CodeChef profile
+    
+    url = f'https://www.codechef.com/users/{username}'
+    r = requests.get(url=url, headers=headers)
+    soup = BeautifulSoup(r.content, 'html5lib')
+
+    rating = int(soup.find('div', attrs={'class': 'rating-number'}).text)
+    stars = len(soup.find('div', attrs={'class': 'rating-star'}).find_all('span'))
+
+    profile = {
+        "username": username,
+        "platform": platform,
+        "stars": stars,
+        "rating": rating,
+    }
+    return profile
