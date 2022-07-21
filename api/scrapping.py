@@ -23,3 +23,23 @@ def getGFGProfile(username, platform):
     }
     return profile
 
+
+
+def getLeetCodeProfile(username, platform):
+    # Retrieve LeetCode profile
+
+    url = r'https://leetcode.com/graphql?query={matchedUser(username:%20%22{username}%22)%20{username%20submitStats:submitStatsGlobal%20{acSubmissionNum%20{difficulty%20count%20submissions}}}}'
+    url = url.replace('{username}', 'charitra1022')
+    
+    r = requests.get(url=url, headers=headers)
+    data = r.json()
+
+    problemsSolved = data['data']['matchedUser']['submitStats']['acSubmissionNum'][0]['count']
+
+    profile = {
+        "username": username,
+        "platform": platform,
+        "problems": problemsSolved,
+    }
+    return profile
+
