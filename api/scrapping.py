@@ -78,7 +78,13 @@ def getHackerRankProfile(username, platform):
     for badge in badgesList:
         name = badge.find('text', attrs={'class': 'badge-title'}).text
         stars = len(badge.find_all('svg', attrs={'class', 'badge-star'}))
-        data = { name: stars }
+        icon = str(badge.find('div', attrs={'class': 'ui-badge-wrap'}))
+        data = {
+            name: {
+                'stars': stars,
+                'icon': icon,
+            }
+        }
         badgeData.append(data)
 
     profile = {
