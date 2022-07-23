@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path
+from django.conf.urls.static import static
+from django.conf import settings
 
 # from rest_framework.urlpatterns import format_suffix_patterns
 from api import views
@@ -22,6 +24,8 @@ from api import views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+    path('', views.home),
+
     re_path(r'^codingprofile/$', views.GetDetails.as_view()),
     
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
