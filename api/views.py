@@ -1,3 +1,5 @@
+from django.shortcuts import render
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -6,6 +8,10 @@ from .models import GFGProfile, CodeChefProfile, LeetCodeProfile, HackerRankProf
 from .serializers import GFGProfileSerializer, CodeChefProfileSerializer, LeetCodeProfileSerializer, HackerRankProfileSerializer
 from .scrapping import getCodeChefProfile, getHackerRankProfile, getGFGProfile, getLeetCodeProfile
 
+
+
+def home(request):
+    return render(request, 'api/home.html', {})
 
 class GetDetails(APIView):
     def get(self, request):
