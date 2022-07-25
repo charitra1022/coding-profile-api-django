@@ -86,3 +86,8 @@ Returns JSON of the following format. Depends on platform.
 
 ## Implementation
 This API is implemented on my portfolio site. See [here](https://charitra.netlify.app/).
+
+<br/>
+
+## References
+1. [Vanilla JSON Path Picker](https://www.cssscript.com/json-viewer-path-picker/)

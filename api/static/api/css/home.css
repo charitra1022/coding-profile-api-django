@@ -1,0 +1,50 @@
+main {
+    min-height: 100vh;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+.description {
+    text-align: center;
+    font-size: larger;
+    margin: 20px;
+}
+.try-it {
+    margin: 50px;
+    text-align: center;
+}
+
+#url-container {
+    font-family: monospace;
+    font-size: larger;
+    margin: 50px 30px 5px;
+    padding: 10px;
+    background-color: rgb(227, 228, 228);
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+#api-controls {
+    display: none;
+}
+
+#response-container {
+    background-color: rgb(227, 228, 228);
+    margin: 50px auto 5px;
+    padding: 10px;
+}
+.json-tree {
+    position: relative;
+    text-align: left;
+    margin: auto;
+    padding: 30px;
+    width: max-content;
+}
+
+footer {
+    text-align: center;
+    background-color: aqua;
+}
