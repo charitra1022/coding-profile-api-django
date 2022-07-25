@@ -43,8 +43,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',    #added cors header
+    'whitenoise.middleware.WhiteNoiseMiddleware', #added whitenoise
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -126,16 +127,6 @@ STATIC_ROOT = BASE_DIR / 'api/static'   ## added static url
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-# Allow only my portfolio to access the API
-# CORS_ORIGIN_ALLOW_ALL = False
-# ALLOWED_HOSTS=[
-#     'https://charitra.netlify.app'
-# ]
-# CORS_ORIGIN_WHITELIST = [
-#     'https://charitra.netlify.app'
-# ]
 
 # Allow all connections
 ALLOWED_HOSTS=['*']
