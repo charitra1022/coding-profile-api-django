@@ -28,4 +28,5 @@ urlpatterns = [
 
     re_path(r'^codingprofile/$', views.GetDetails.as_view()),
     
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
+# ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
