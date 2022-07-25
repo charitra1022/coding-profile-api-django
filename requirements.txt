@@ -17,4 +17,5 @@ tzdata==2021.5
 urllib3==1.26.10
 waitress==2.1.1
 webencodings==0.5.1
+whitenoise==6.2.0
 wincertstore==0.2
