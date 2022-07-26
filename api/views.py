@@ -27,6 +27,9 @@ class GetDetails(APIView):
         # Check for GeeksForGeeks profile, and create/update it in db
         if(platform=='gfg'):
             profileDetail = getGFGProfile(username=username, platform=platform)
+            if(not profileDetail['status']): return Response(profileDetail, status=status.HTTP_404_NOT_FOUND)
+
+
             newProfile = GFGProfile(
                 username=profileDetail['username'], 
                 platform=profileDetail['platform'], 
@@ -41,6 +44,8 @@ class GetDetails(APIView):
         # Check for LeetCode profile, and create/update it in db
         elif(platform=='leetcode'):
             profileDetail = getLeetCodeProfile(username=username, platform=platform)
+            if(not profileDetail['status']): return Response(profileDetail, status=status.HTTP_404_NOT_FOUND)
+            
             newProfile = LeetCodeProfile(
                 username=profileDetail['username'], 
                 platform=profileDetail['platform'], 
@@ -55,6 +60,8 @@ class GetDetails(APIView):
         # Check for CodeChef profile, and create/update it in db
         elif(platform=='codechef'):
             profileDetail = getCodeChefProfile(username=username, platform=platform)
+            if(not profileDetail['status']): return Response(profileDetail, status=status.HTTP_404_NOT_FOUND)
+            
             newProfile = CodeChefProfile(
                 username=profileDetail['username'], 
                 platform=profileDetail['platform'], 
@@ -70,6 +77,8 @@ class GetDetails(APIView):
         # Check for HackerRank profile, and create/update it in db
         elif(platform=='hackerrank'):
             profileDetail = getHackerRankProfile(username=username, platform=platform)
+            if(not profileDetail['status']): return Response(profileDetail, status=status.HTTP_404_NOT_FOUND)
+            
             newProfile = HackerRankProfile(
                 username=profileDetail['username'], 
                 platform=profileDetail['platform'], 
@@ -91,7 +100,7 @@ class GetDetails(APIView):
         
         # Add status code to response
         data = serializer.data
-        data['status'] = True;
+        data['status'] = True
 
         # return the API response as json
         return Response(data, status=status.HTTP_302_FOUND)
