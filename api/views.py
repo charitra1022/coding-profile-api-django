@@ -83,13 +83,16 @@ class GetDetails(APIView):
 
         # Return 404 in case of none above
         else:
-            return Response({'status': '404'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({
+                'status': False,
+                'message': "incorrect value of platform parameter",
+                }, status=status.HTTP_404_NOT_FOUND)
 
         
         # Add status code to response
         data = serializer.data
-        data['status'] = '200'
+        data['status'] = True;
 
         # return the API response as json
-        return Response(data)
+        return Response(data, status=status.HTTP_302_FOUND)
 
