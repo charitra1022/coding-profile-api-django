@@ -67,6 +67,7 @@ class GetDetails(APIView):
                 platform=profileDetail['platform'], 
                 stars=profileDetail['stars'],
                 rating=profileDetail['rating'],
+                icon=profileDetail['icon'],
             )
             newProfile.save()
             
