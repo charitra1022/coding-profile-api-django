@@ -15,6 +15,7 @@ class CodeChefProfile(models.Model):
     platform = models.CharField(max_length=20)
     stars = models.PositiveIntegerField(default=0)
     rating = models.PositiveIntegerField(default=0)
+    icon = models.CharField(max_length=1000, default="")
 
     def __str__(self) -> str:
         msg = f"{self.platform}:{self.username}"

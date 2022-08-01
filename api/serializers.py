@@ -12,7 +12,7 @@ class GFGProfileSerializer(serializers.ModelSerializer):
 class CodeChefProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = CodeChefProfile
-        fields = ('username', 'platform', 'stars', 'rating')
+        fields = ('username', 'platform', 'stars', 'rating', 'icon')
 
 
 class LeetCodeProfileSerializer(serializers.ModelSerializer):

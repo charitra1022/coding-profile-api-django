@@ -90,14 +90,17 @@ def getCodeChefProfile(username, platform):
 
     rating = int(soup.find('div', attrs={'class': 'rating-number'}).text)
     stars = len(soup.find('div', attrs={'class': 'rating-star'}).find_all('span'))
+    icon = str(soup.find('div', attrs={'class': 'rating-star'}))
 
     profile = {
         "username": username,
         "platform": platform,
         "stars": stars,
         "rating": rating,
+        "icon": icon,
         "status": True,
     }
+
     return profile
     
 
