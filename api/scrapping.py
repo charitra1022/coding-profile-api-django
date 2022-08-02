@@ -87,8 +87,9 @@ def getCodeChefProfile(username, platform):
             'message': "user not found",
         }
 
-
-    rating = int(soup.find('div', attrs={'class': 'rating-number'}).text)
+    ### After addition of Provisional rating on 02-08-2022, rating scrapping changed
+    # rating = int(soup.find('div', attrs={'class': 'rating-number'}).text)     ## old method
+    rating = int(soup.find('div', attrs={'class': 'rating-number'}).text.split("?")[0])
     stars = len(soup.find('div', attrs={'class': 'rating-star'}).find_all('span'))
     icon = str(soup.find('div', attrs={'class': 'rating-star'}))
 
