@@ -18,7 +18,7 @@ def getGFGProfile(username, platform):
 
     try:
         # Try to look for userName span in html content. If not found, user doesnt exist
-        soup.find('span', attrs={'class':'userName'}).text
+        soup.find('div', attrs={'class':'profile_name'}).text
     except:
         # the tag wasnt found, so user doesnt exist
         return {
@@ -26,7 +26,7 @@ def getGFGProfile(username, platform):
             'message': "user not found",
         }
 
-    problemsSolved = int(soup.find('a', attrs={'href': '#problem-solved-div'}).text.split(':')[1].split()[0])
+    problemsSolved = int(soup.find_all('span', attrs={'class': 'score_card_value'})[1].text)
 
     profile = {
         "username": username,
