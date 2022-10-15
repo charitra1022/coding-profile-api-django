@@ -14,6 +14,25 @@ def home(request):
     return render(request, 'api/home.html', {})
 
 
+def getDataFromSerializerObject(serializerOb):
+    '''
+    Returns data from the serializer object if user found by adding status key to dictionary object
+
+    param:
+        serializerOb -> false or serializer object
+    return:
+        Dict -> not found -> message with false status 
+                found -> data with true status
+    '''
+
+    if serializerOb:
+        data = serializerOb.data
+        data['status'] = True
+        return data
+    return {
+        'message': 'user not found',
+        'status': False,
+    }
 
 
 
@@ -181,7 +200,7 @@ class GetDetails(APIView):
             if(not data['status']): return data['response']
             
             # Get serialized data from the profile
-            serializer = data['serializer']
+            serializerData = data['serializer'].data
 
 
         # Check for LeetCode profile, and create/update it in db
@@ -190,7 +209,7 @@ class GetDetails(APIView):
             if(not data['status']): return data['response']
             
             # Get serialized data from the profile
-            serializer = data['serializer']
+            serializerData = data['serializer'].data
 
 
         # Check for CodeChef profile, and create/update it in db
@@ -199,7 +218,7 @@ class GetDetails(APIView):
             if(not data['status']): return data['response']
             
             # Get serialized data from the profile
-            serializer = data['serializer']
+            serializerData = data['serializer'].data
 
 
         # Check for HackerRank profile, and create/update it in db
@@ -208,8 +227,35 @@ class GetDetails(APIView):
             if(not data['status']): return data['response']
             
             # Get serialized data from the profile
-            serializer = data['serializer']
+            serializerData = data['serializer'].data
+            
 
+        # Check for all platform presence and create/update it in db
+        elif(platform=='all'):
+            serializerData = {}
+
+            # Get data from all platform
+            gfgData = GFGProfileOperation(username, 'gfg')
+            leetcodeData = LeetCodeProfileOperation(username, 'leetcode')
+            codechefData = CodeChefProfileOperation(username, 'codechef')
+            hackerrankData = HackerRankProfileOperation(username, 'hackerrank')
+            
+            # If user not found in any of the platform
+            if(not (gfgData['status'] or leetcodeData['status'] or codechefData['status'] or hackerrankData['status'])):
+                return Response({
+                    'status': False,
+                    'message': 'user not found in any of the platforms'
+                }, status=status.HTTP_404_NOT_FOUND)
+
+            
+            # Get serialized data from the profile
+            serializerData['platform'] = {
+                'gfg': getDataFromSerializerObject(gfgData.get('serializer', False)),
+                'leetcode': getDataFromSerializerObject(leetcodeData.get('serializer', False)),
+                'codechef': getDataFromSerializerObject(codechefData.get('serializer', False)),
+                'hackerrank': getDataFromSerializerObject(hackerrankData.get('serializer', False)),
+            }
+            
 
         # Return 404 in case of none above
         else:
@@ -217,12 +263,11 @@ class GetDetails(APIView):
                 'status': False,
                 'message': "incorrect value of platform parameter",
                 }, status=status.HTTP_404_NOT_FOUND)
+                
 
-        
         # Add status code to response
-        data = serializer.data
-        data['status'] = True
+        serializerData['status'] = True
 
         # return the API response as json
-        return Response(data, status=status.HTTP_302_FOUND)
+        return Response(serializerData, status=status.HTTP_302_FOUND)
 
