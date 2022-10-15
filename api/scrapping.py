@@ -46,7 +46,7 @@ def getLeetCodeProfile(username, platform):
     data = r.json()
 
     # check if user has been found or not
-    if(type(data['data']['matchedUser'])==NoneType):
+    if(type(data['data']['matchedUser'])==type(None)):
         return {
             'status': False,
             'message': "user not found",
